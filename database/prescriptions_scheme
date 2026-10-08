@@ -1,0 +1,11 @@
+CREATE TABLE prescriptions(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    medication_name VARCHAR(255) NOT NULL,
+    dosage VARCHAR(100) NOT NULL,
+    instructions TEXT,
+    date_prescribed DATETIME DEFAULT CURRENT_TIMESTAMP,
+    doctor_id INT,
+    patient_id INT,
+    FOREIGN KEY (doctor_id) REFERENCES doctors(id)  ON DELETE CASCADE,
+    FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE CASCADE
+);

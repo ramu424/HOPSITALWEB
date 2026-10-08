@@ -1,0 +1,131 @@
+.header{
+    z-index: 1;
+    display: flex;
+    position: absolute;
+    justify-content: space-between;
+    align-items: center;
+    background-color: lightblue;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100px;
+}
+
+
+.left-side a{
+    text-decoration: none;
+    color: black;
+    margin-left:10px;
+    font-size: 20px;
+    transition: 0.12s;
+}
+
+.left-side a:hover{
+    color: white;
+}
+
+.logo{
+    background: transparent;
+    height: 100px;
+}
+
+.middle-side{
+    display: flex;
+    width: 1000px;
+    column-gap: 50px;
+    justify-content: center;
+}
+
+.middle-side a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    transition: 0.12s;
+}
+.middle-side a:hover{
+    color: black;
+    cursor: pointer;
+    translate: 0 -2px;
+    padding: 6px;
+    background-color: white;
+}
+
+.right-side{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    row-gap: 50px;
+    margin-right: 12px;
+}
+
+.welcome-message{
+    font-size: 20px;
+    margin-top: -20px;
+}
+
+.logout-click{
+    text-decoration: none;
+    position: absolute;
+    right: 65px;
+    bottom: -30px;
+    color: darkblue;
+    transition: 0.12s;
+    font-size: 20px;
+}
+
+.logout-click:hover{
+    translate: 0 -2px;
+    color: #00006a;
+}
+
+.login-click{
+    text-decoration: none;
+    color: darkblue;
+    transition: 0.12s;
+}
+
+.login-click:hover{
+    translate: 0 -2px;
+    color: #00006a;
+}
+
+.signup-click{
+    text-decoration: none;
+    color: darkblue;
+    transition: 0.12s;
+}
+.signup-click:hover{
+    translate: 0 -2px;
+    color: #00006a;
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: auto;
+        flex-direction: column;
+        padding: 15px 0;
+        position: relative;
+    }
+
+    .left-side, .middle-side, .right-side {
+        width: 100%;
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    .middle-side {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .right-side {
+        flex-direction: row;
+        gap: 20px;
+        margin-right: 0;
+    }
+
+    .logout-click {
+        position: static;
+        margin-top: 10px;
+    }
+}

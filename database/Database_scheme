@@ -1,0 +1,98 @@
+
+CREATE DATABASE IF NOT EXISTS hospitalmanagement;
+USE hospitalmanagement;
+
+
+DROP TABLE IF EXISTS prescriptions;
+DROP TABLE IF EXISTS appointments;
+DROP TABLE IF EXISTS patients;
+DROP TABLE IF EXISTS doctors;
+DROP TABLE IF EXISTS users;
+
+
+CREATE TABLE users (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(50) NOT NULL,
+    role ENUM('ADMIN', 'DOCTOR', 'PATIENT') NOT NULL
+);
+
+
+CREATE TABLE doctors(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    major ENUM('SURGEON', 'GENERAL') NOT NULL,
+    gender ENUM('FEMALE','MALE') NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS patients(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    gender ENUM('FEMALE','MALE') NOT NULL,
+    birth_date DATE NOT NULL,
+    middle_name VARCHAR(255),
+    email VARCHAR(255) NOT NULL UNIQUE,
+    last_name VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE appointments(
+	appointment_id INT PRIMARY KEY AUTO_INCREMENT,
+    appointment_date DATE NOT NULL,
+    appointment_time TIME NOT NULL,
+    patient_id INT,
+    doctor_id INT,
+	FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE CASCADE,
+	FOREIGN KEY (doctor_id) REFERENCES doctors(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE prescriptions(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    medication_name VARCHAR(255) NOT NULL,
+    dosage VARCHAR(100) NOT NULL,
+    instructions TEXT,
+    date_prescribed DATETIME DEFAULT CURRENT_TIMESTAMP,
+    doctor_id INT,
+    patient_id INT,
+    FOREIGN KEY (doctor_id) REFERENCES doctors(id)  ON DELETE CASCADE,
+    FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE CASCADE
+);
+
+
+INSERT INTO users (username, password, role) VALUES
+('admin_super', 'pass1234', 'ADMIN'),
+('dr_smith', 'smithsecure', 'DOCTOR'),
+('dr_jones', 'jonessecure', 'DOCTOR'),
+('patient_jdoe', 'jdoe123', 'PATIENT'),
+('patient_msmith', 'msmith123', 'PATIENT'),
+('patient_ataylor', 'ataylor123', 'PATIENT');
+
+
+INSERT INTO doctors (name, last_name, major, gender, user_id) VALUES
+('Alice', 'Smith', 'GENERAL', 'FEMALE', 2),
+('Robert', 'Jones', 'SURGEON', 'MALE', 3);
+
+
+INSERT INTO patients (name, gender, birth_date, middle_name, email, last_name, user_id) VALUES
+('John', 'MALE', '1985-04-12', 'Edward', 'john.doe@example.com', 'Doe', 4),
+('Mary', 'FEMALE', '1992-08-25', 'Ann', 'mary.smith@example.com', 'Smith', 5),
+('Alex', 'MALE', '2001-11-03', NULL, 'alex.taylor@example.com', 'Taylor', 6);
+
+
+INSERT INTO appointments (appointment_date, appointment_time, patient_id, doctor_id) VALUES
+('2026-05-10', '09:00:00', 1, 1),
+('2026-05-10', '10:30:00', 2, 1),
+('2026-05-11', '14:00:00', 3, 2),
+('2026-05-15', '11:15:00', 1, 2);
+
+
+INSERT INTO prescriptions (medication_name, dosage, instructions, date_prescribed, doctor_id, patient_id) VALUES
+('Amoxicillin', '500mg', 'Take one capsule three times a day for 7 days.', '2026-05-01 09:30:00', 1, 1),
+('Lisinopril', '10mg', 'Take one tablet daily in the morning.', '2026-05-02 11:00:00', 1, 2),
+('Ibuprofen', '400mg', 'Take as needed for pain, up to every 6 hours.', '2026-05-05 14:45:00', 2, 3);
+
+

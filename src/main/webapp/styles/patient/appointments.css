@@ -1,0 +1,104 @@
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.appointmentCard {
+    background-color: #f9f1f1;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-left: 5px solid #007bff;
+}
+
+.appointmentCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+.appointmentCard p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.appointmentCard strong {
+    color: #222;
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+
+#temp-message, #book-now{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+#temp-message {
+    background-color: red;
+    width: 300px;
+    color: white;
+    padding: 20px;
+    border-radius: 30px;
+}
+#book-now {
+    margin-top: 20px;
+    background-color: lightgreen;
+    width: 300px;
+    padding: 20px;
+    border-radius: 30px;
+    border: none;
+    font-size: 20px;
+    transition: 0.25s;
+    text-decoration: none;
+    color: white;
+}
+
+#book-now:hover {
+    background-color: #007400;
+    cursor: pointer;
+    translate: 0 -2px;
+}
+
+
+.delete-btn{
+    background-color: red;
+    color: white;
+    border:none;
+    border-radius: 30px;
+    width: 300px;
+    padding: 20px;
+    transition: 0.25s;
+}
+
+.delete-btn:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: #d30000;
+}
+
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    #temp-message, #book-now {
+        width: 90%;
+    }
+
+    .delete-btn {
+        width: 100%;
+    }
+}
